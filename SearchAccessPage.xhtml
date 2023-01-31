@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>ACCESSGROUP</title>
+
+        <link href="home.css" rel="stylesheet"></link>
+         <!--<script src="js/jquery-3.2.1.min.js"></script>-->
+            <script type='text/javascript'>
+                $(document).ready(function(){
+                
+                    $('#imageReplacess').attr("src","image/download (8)_2.png");
+               
+              });
+            </script>
+
+    </h:head>
+
+    <h:body style="background: url(image/a_2.jpg)">
+        <h1 style="color: white; font-family: cursive;font-size:30px;float: right"> SEARCH ACCESSGROUP</h1>
+        <h1 style="color: transparent; font-family: sans-serif;font-size: 20px">ADD </h1>
+        <h1 style="color: transparent; font-family: sans-serif;font-size: 20px">ADD </h1>
+        <h1 style="color: transparent; font-family: sans-serif;font-size: 28px">ADD </h1>
+        <div id="menuss">
+            <center>
+                <ui:include src="munu_access.xhtml" />
+            </center>
+        </div>
+
+        <center>
+
+            <h:messages id="emessage"  showDetail="true" style="font-weight: bold"/>
+
+            <h:outputText id="resmessage" value="#{flash.responsemessage}" styleClass="#{flash.styleclass}" />
+            <p:ajaxStatus >
+                <f:facet name="start">
+                    <h:outputText styleClass="alert_info" value="Loading..." />
+                </f:facet>
+                <f:facet name="complete">
+                    <h:outputText  value="" />
+                </f:facet>
+            </p:ajaxStatus> 
+
+         <h1 style="color: transparent; font-family: sans-serif;font-size: 15px">SEARCH</h1>
+            <h:form>
+                <td valign="top">
+                   
+                        <h:panelGrid columns="3"  >
+                            <p:outputLabel style="color: white ;font-size:30px;font-family: fantasy;" value="Enter AccessGroup: "/>
+                            <p:inputText value="#{searchAccessBean.value}" required="true" requiredMessage="Enter AccessGroup"/>
+                            <p:commandButton style="background:  black ;color: white;font-size:20px;font-family: cursive" value="Search" action="#{searchAccessBean.mSearch()}"  update="a,emessage"/>
+                        </h:panelGrid>
+                    <br></br>
+              
+                </td>
+  <br></br>
+                <center>
+
+                    <h:panelGrid  style="width: 80%" columns="4" id="a">
+                       
+                        <p:outputLabel value="ID" style="color: white;font-size:20px;font-family: fantasy" />
+                        <p:inputText style="width: 80%"   readonly="true" value="#{searchAccessBean.id}" />
+
+                        <p:outputLabel value="AccessGroup" style="color: white;font-size:20px;font-family: fantasy" />
+                        <p:inputText  style="width: 80%" readonly="true" value="#{searchAccessBean.accessgroup}"/>
+
+                        <h:outputText value="Undertaking" style="color: white;font-size:20px;font-family: fantasy"/>
+                        <p:inputText  style="width: 80%" readonly="true" value="#{searchAccessBean.undertaking}"/>
+
+                        <h:outputText value="Active" style="color: white;font-size:20px;font-family: fantasy"/>
+                        <p:selectBooleanCheckbox  style="width: 80%" value="#{searchAccessBean.active}"/>
+
+                        <h:outputText value="AccessGroupCode" style="color: white;font-size:20px;font-family: fantasy"/>
+                        <p:inputText  style="width: 80%" readonly="true" value="#{searchAccessBean.activegroupcode}"/>
+
+                        <h:outputText value="PaymentType" style="color: white;font-size:20px;font-family: fantasy"/>
+                        <p:inputText  style="width: 80%" readonly="true" value="#{searchAccessBean.paymenttype}"/>
+
+                        <h:outputText value="RequestId" style="color: white;font-size:20px;font-family: fantasy"/>
+                        <p:inputText  style="width: 80%" readonly="true" value="#{searchAccessBean.requestId}"/>
+
+                        <h:outputText value="EscrowBalance" style="color: white;font-size:20px;font-family: fantasy"/>
+                        <p:inputText  style="width: 80%" readonly="true" value="#{searchAccessBean.escrowbalance}"/>
+
+                        <h:outputText value="Token" style="color: white;font-size:20px;font-family: fantasy"/>
+                        <p:inputText  style="width: 80%" readonly="true" value="#{searchAccessBean.token}"/>
+
+                        <h:outputText value="DateTokenGenerated" style="color: white;font-size:20px;font-family: fantasy"/>
+                        <p:inputText  style="width: 80%" readonly="true" value="#{searchAccessBean.daetokengeneraed}"/>
+
+                        <h:outputText value="RequestIp2" style="color: white;font-size:20px;font-family: fantasy"/>
+                        <p:inputText  style="width: 80%" readonly="true" value="#{searchAccessBean.requestIp2}"/>
+
+
+                    </h:panelGrid>
+                </center>
+            </h:form>
+        </center>
+
+    </h:body>
+</html>

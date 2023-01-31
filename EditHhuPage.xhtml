@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>HHU DEVICE</title>
+
+        <link href="home.css" rel="stylesheet"></link>
+        <script type='text/javascript'>
+            $(document).ready(function () {
+
+                $('#imageReplaces').attr("src", "image/download (9)_1.png");
+
+            });
+        </script>
+    </h:head>
+
+    <h:body style="background: url(image/a_2.jpg)">
+        <h1 style="color: white; font-family: cursive;font-size:30px;float: right"> EDIT HHUDEVICE</h1>
+        <h1 style="color: transparent; font-family: sans-serif;font-size: 20px">ADD </h1>
+        <h1 style="color: transparent; font-family: sans-serif;font-size: 20px">ADD </h1>
+        <h1 style="color: transparent; font-family: sans-serif;font-size: 28px">ADD </h1>
+        <div id="menuss">
+            <center>
+                <ui:include src="menu_hhu.xhtml" />
+            </center>
+        </div>
+
+        <center>
+
+            <h:messages id="emessage"  showDetail="true" style="font-weight: bold"/>
+
+            <h:outputText id="resmessage" value="#{flash.responsemessage}" styleClass="#{flash.styleclass}" />
+            <p:ajaxStatus >
+
+                <f:facet name="start">
+                    <h:outputText styleClass="alert_info" value="Loading..." />
+                </f:facet>
+                <f:facet name="complete">
+                    <h:outputText  value="" />
+                </f:facet>
+            </p:ajaxStatus> 
+            <h1 style="color: transparent; font-family: sans-serif;font-size: 30px">EDIT </h1>
+            <h2 style="color: transparent; font-family: sans-serif">EDIT ACCESSGROUP</h2>
+
+            <center>
+
+                <p:panel id="panpend" style="width:1200px;background-color: transparent">
+                    <h:form>
+                        <p:messages id="emessage" showSummary="true" showDetail="true" style="font-size: 70px; width: 200px"/>
+                        <h:panelGrid columns="5" style="width: inherit">
+                            <p:outputLabel  style="color: white;font-size:30px;font-family: fantasy" value="IMEI:" />
+                            <p:autoComplete completeMethod="#{editHhuBean.completeaccess}"  value="#{editHhuBean.searchValu}" placeholder="Enter Imei"/> 
+                            <p:commandButton  style="background: black ;color: white;font-size:20px;font-family: cursive" value="Search" action="#{editHhuBean.populatedbtable()}" update="tbl"/>
+
+                        </h:panelGrid>
+
+                        <p:dataTable value="#{editHhuBean.access}" var="staff" id="tbl" rowKey="#{staff.imei}" scrollable="true" 
+                                     paginator="true" resizableColumns="true" selection="#{editAccessBean.selected}"  selectionMode="single" style="color: black;font-size:18px;font-family: cursive;background-color: white" >
+
+                            <p:column id="test" headerText="ID" >
+                                <h:outputText value="#{staff.id}"/>
+                            </p:column>
+
+                            <p:column  headerText="IMEI">
+                                <h:outputText value="#{staff.imei}"/>
+                            </p:column>
+
+                            <p:column headerText="SIM NO">
+                                <h:outputText value="#{staff.sim_no}"/>
+                            </p:column>
+
+                            <p:column headerText="SERIAL NO">
+                                <h:outputText value="#{staff.serial_no}"/>
+                            </p:column>
+
+                            <p:column headerText="MODEL NO" >
+                                <h:outputText value="#{staff.model_no}"/>
+                            </p:column>
+
+                            <p:column headerText="RAM" >
+                                <h:outputText value="#{staff.ram}"/>
+                            </p:column>
+
+                            <p:column headerText="ROM" >
+                                <h:outputText value="#{staff.rom}"/>
+                            </p:column>
+
+                            <p:column headerText="MANUFACTURER" >
+                                <h:outputText value="#{staff.manfacturer}"/>
+                            </p:column>
+
+                            <p:column headerText="MARKETER NAME" >
+                                <h:outputText value="#{staff.marketerId}"/>
+                            </p:column>
+
+                            <p:column headerText="OPERATOR NAME" >
+                                <h:outputText value="#{staff.operatorId}"/>
+                            </p:column>
+
+                            <p:column headerText="UTID" >
+                                <h:outputText value="#{staff.utid}"/>
+                            </p:column>
+
+                            <p:column headerText="IS ACTIVE?" >
+                                <p:selectBooleanCheckbox value="#{staff.isactivated}"/>
+                            </p:column>
+
+                            <p:column headerText="ACTIVATION DATE" >
+                                <h:outputText value="#{staff.activationdate}"/>
+                            </p:column>
+
+                            <p:column headerText="Action" style="width:40px;text-align: center">
+                                <p:commandButton oncomplete="PF('editDialog').show()" icon="ui-icon-pencil" title="View" update="record" action="#{editHhuBean.populatedbtable()}">
+                                    <f:setPropertyActionListener value="#{staff}" target="#{editHhuBean.selected}" />
+                                </p:commandButton>
+                            </p:column>
+
+                        </p:dataTable>           
+
+                    </h:form>
+
+                    <p:dialog id="tdbox" style="height:30px" fitViewport="true"  header="Edit AccessGroup Record" widgetVar="editDialog" modal="true" position="center"  showEffect="fade" hideEffect="fade" resizable="false" closable="true"> 
+
+                        <h:form id="engSrch" prependId="false" > 
+                            <p:panelGrid columns="2" id="record" columnClasses="label,value" style="text-wrap: avoid;width: 400px" >
+
+                                <h:outputLabel value="IMEI:"/>
+                                <h:inputText value="#{editHhuBean.selected.imei}"/>
+
+                                <h:outputLabel value="SIM N0:"/>
+                                <h:inputText value="#{editHhuBean.selected.sim_no}"/>
+
+                                <h:outputLabel value="SERIAL NO"/>
+                                <h:inputText value="#{editHhuBean.selected.serial_no}"/>
+
+                                <h:outputLabel value="MODAL NO:"/>
+                                <h:inputText value="#{editHhuBean.selected.model_no}"/>
+
+                                <h:outputLabel  value="RAM:"/>
+                                <h:inputText value="#{editHhuBean.selected.ram}"/>
+
+                                <h:outputLabel value="ROM:"/>
+                                <h:inputText value="#{editHhuBean.selected.rom}"/>
+
+                                <h:outputLabel value="MANUFACTURER:"/>
+                                <h:inputText value="#{editHhuBean.selected.manfacturer}"/>
+
+                                <h:outputLabel  value="MARKETER NAME:"/>
+                                <h:selectOneMenu label="ENTER MARKETER NAME" value="#{editHhuBean.marketername}">
+                                    <f:selectItems value="#{editHhuBean.marketerList}"/>
+                                </h:selectOneMenu>
+
+                                <h:outputLabel value="OPERATR NAME:"/>
+                                <h:selectOneMenu label="ENTER OPERATOR NAME" value="#{editHhuBean.operator}">
+                                    <f:selectItems value="#{editHhuBean.operatorList}"/>
+                                </h:selectOneMenu>
+
+                                <h:outputLabel value="UTID:"/>
+                                <h:inputText value="#{editHhuBean.selected.utid}"/>
+
+                                <h:outputLabel value="IS ACTIVE?:"/>
+                                <h:selectBooleanCheckbox value="#{editHhuBean.selected.isactivated}"/>
+
+                                <h:outputLabel value="ACTIVATION DATE:"/>
+                                <h:inputText value="#{editHhuBean.selected.activationdate}"/>
+
+                            </p:panelGrid>
+
+                            <p:commandButton  action="#{editHhuBean.editaccess()}" id="save" icon="ui-icon-check" value="Save" style="margin-top: 10px;" process="@this,engSrch"/>
+                        </h:form>
+
+                    </p:dialog>
+
+                </p:panel>
+
+            </center>
+        </center> 
+    </h:body>
+
+</html>

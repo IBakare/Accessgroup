@@ -1,0 +1,58 @@
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+    <f:view contentType="text/html">
+        <h:head>
+            <style type="text/css">
+                a img{
+                    width: 150px !important;
+                    height: 150px !important;
+                    padding-top: 20px;
+
+                }
+
+            </style>
+             <script type='text/javascript'>
+                $(document).ready(function () {
+                    $('#link').click(function () {
+                        $('#imageReplace').attr("src", "image/images.jpg");
+                    });
+                         </script>
+            <f:facet name="first">
+                <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
+                <title>Navigate</title>
+
+            </f:facet>
+
+        </h:head>
+        <h:body>
+            <ui:composition >
+
+
+                <h:form>
+
+                </h:form>
+                <center>
+
+                    <a  href="accessHome.xhtml?faces-redirect=true"><img id="a" src="image/group-login-128_1.png"> </img></a>
+                    <a  href="hhuHome.xhtml?faces-redirect=true"><img  id="b" src="image/58309-200_1.png"> </img></a>
+                    <a id="link"  href="tampering.xhtml?faces-redirect=true"><img  id="imageReplace" src="image/images_1.png"> </img></a>
+                    <a  href="#{loginBean.logoutUser()}" immediate="true"><img   src="image/images.png"> </img></a>
+                     
+                </center>
+
+
+            </ui:composition>
+           
+        </h:body>
+    </f:view>
+</html>

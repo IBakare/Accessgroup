@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>HHU DEVICE</title>
+        <link href="home.css" rel="stylesheet"></link>
+<script type='text/javascript'>
+            $(document).ready(function () {
+
+                $('#imageReplace').attr("src", "image/download (3)_1.png");
+
+            });
+        </script>
+    </h:head>
+    <h:body style="background: url(image/a_2.jpg)">
+ <h1 style="color: white; font-family: cursive;font-size:30px;float: right"> NEW HHUDEVICE</h1>
+        <h1 style="color: transparent; font-family: sans-serif;font-size: 20px">ADD </h1>
+        <h1 style="color: transparent; font-family: sans-serif;font-size: 20px">ADD </h1>
+        <h1 style="color: transparent; font-family: sans-serif;font-size: 28px">ADD </h1>
+        <div id="menuss">
+            <center>
+                <ui:include src="menu_hhu.xhtml" />
+            </center>
+        </div>
+
+        <center>
+            <h:messages id="emessage"  showDetail="true" style="font-weight: bold"/>
+
+            <h:outputText id="resmessage" value="#{flash.responsemessage}" styleClass="#{flash.styleclass}" />
+            <p:ajaxStatus >
+                <f:facet name="start">
+                    <h:outputText styleClass="alert_info" value="Loading..." />
+                </f:facet>
+                <f:facet name="complete">
+                    <h:outputText  value="" />
+                </f:facet>
+            </p:ajaxStatus> 
+            <h1 style="color: transparent; font-family: sans-serif;font-size: 30px">ADD </h1>
+
+            <h:form>
+                <center>
+                    <p:messages id="emessage" showSummary="true" showDetail="true"/>
+                    <h:panelGrid  columns="4">
+                        <p:outputLabel style="color:white;font-size:20px;font-family: fantasy" value="IMEI:"/>
+                        <p:inputText style="width: 80%"  value="#{addHhuBean.imei}" required="true" requiredMessage="Please enter the Access Group!"/>
+                        <p:outputLabel style="color:white;font-size:20px;font-family: fantasy" value="SIM N0:"/>
+                        <p:inputText style="width: 80%"  value="#{addHhuBean.sim_no}"  required="true" requiredMessage="Please enter the Undertaking!"/>
+                        <p:outputLabel  style="color:white;font-size:20px;font-family: fantasy" value="SERIAL NO"/>
+                        <p:inputText style="width: 80%"  value="#{addHhuBean.serial_no}"/>
+                        <p:outputLabel style="color:white;font-size:20px;font-family: fantasy" value="MODAL NO:"/>
+                        <p:inputText style="width: 80%"  value="#{addHhuBean.model_no}"/>
+                        <p:outputLabel style="color:white;font-size:20px;font-family: fantasy" value="ROM:"/>
+                        <p:inputText  style="width: 80%" value="#{addHhuBean.rom}"/>
+                        <p:outputLabel style="color:white;font-size:20px;font-family: fantasy" value="MANUFACTURER:"/>
+                        <p:inputText style="width: 80%"  value="#{addHhuBean.manfacturer}"/>
+                        <p:outputLabel style="color:white;font-size:20px;font-family: fantasy" value="MARKETER NAME:"/>
+                        <p:selectOneMenu  label="ENTER MARKETER NAME" value="#{addHhuBean.marketername}">
+                            <f:selectItems value="#{addHhuBean.marketerList}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel  style="color:white;font-size:20px;font-family: fantasy" value="OPERATOR NAME:"/>
+                        <p:selectOneMenu label="ENTER OPERATOR NAME" value="#{addHhuBean.operator}">
+                            <f:selectItems value="#{addHhuBean.operatorList}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel style="color:white;font-size:20px;font-family: fantasy" value="UTID:"/>
+                        <p:inputText style="width: 80%"  value="#{addHhuBean.utid}"/>
+                        <p:outputLabel style="color:white;font-size:20px;font-family: fantasy" value="IS ACTIVE?:"/>
+                        <p:selectBooleanCheckbox value="#{addHhuBean.isactivated}"/>
+                        <p:outputLabel style="color:white;font-size:20px;font-family: fantasy" value="ACTIVATION DATE:"/>
+                        <p:calendar  value="#{addHhuBean.activationdate}"/>
+                        <p:outputLabel style="color:white;font-size:20px;font-family: fantasy" value="RAM:"/>  
+                        <p:inputText style="width: 80%"  value="#{addHhuBean.ram}"/>
+                        `                     
+                    </h:panelGrid>
+                    <p:commandButton style="background:  white ;color: black;font-size:25px;font-family: fantasy" action="#{addHhuBean.addhhu()}" value="Save" update="emessage"/>
+
+                </center>
+            </h:form>
+        </center>
+
+    </h:body>
+</html>

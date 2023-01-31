@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>ACCESSGROUP</title>
+        <link href="home.css" rel="stylesheet"></link>
+
+        <script type='text/javascript'>
+            $(document).ready(function () {
+
+                $('#imageReplace').attr("src", "image/download (4)_2.png");
+
+            });
+        </script>
+    </h:head>
+    <h:body style="background: url(image/a_2.jpg)">
+        <h1 style="color: white; font-family: cursive;font-size:30px;float: right"> NEW ACCESSGROUP</h1>
+        <h1 style="color: transparent; font-family: sans-serif;font-size: 20px">ADD </h1>
+        <h1 style="color: transparent; font-family: sans-serif;font-size: 20px">ADD </h1>
+        <h1 style="color: transparent; font-family: sans-serif;font-size: 28px">ADD </h1>
+        <div id="menuss">
+            <center>
+                <ui:include src="munu_access.xhtml" />
+            </center>
+        </div>
+
+        <center>
+            <h:messages id="emessage"  showDetail="true" style="font-weight: bold"/>
+
+            <h:outputText id="resmessage" value="#{flash.responsemessage}" styleClass="#{flash.styleclass}" />
+            <p:ajaxStatus >
+                <f:facet name="start">
+                    <h:outputText styleClass="alert_info" value="Loading..." />
+                </f:facet>
+                <f:facet name="complete">
+                    <h:outputText  value="" />
+                </f:facet>
+            </p:ajaxStatus> 
+            <h1 style="color: transparent; font-family: sans-serif;font-size: 30px">ADD </h1>
+
+            <h:form>
+                <center>
+                    <p:messages id="emessage" showSummary="true" showDetail="true"/>
+                    <h:panelGrid  columns="4" >
+                        <p:outputLabel  style="color:white;font-size:20px;font-family: fantasy" value="ACCESS GROUP:"/>
+                        <p:inputText style="width: 80%"  value="#{addAccessBean.accessgroup}" required="true" requiredMessage="Please enter the Access Group!"/>
+                        <p:outputLabel style="color: white;font-size:20px ;font-family: fantasy"  value="ACTIVE?"/>
+                        <p:selectBooleanCheckbox value="#{addAccessBean.active}"/>
+                        <p:outputLabel style="color: white;font-size:20px;font-family: fantasy "  value="ACCESS GROUP CODE:"/>
+                        <p:inputText style="width: 80%" value="#{addAccessBean.activegroupcode}"/>
+                        <p:outputLabel style="color: white;font-size:20px ;font-family: fantasy" value="UNDERTAKING:"/>
+                        <p:inputText style="width: 80%"  value="#{addAccessBean.undertaking}"  required="true" requiredMessage="Please enter the Undertaking!"/>
+                        <p:outputLabel style="color: white;font-size:20px ;font-family: fantasy"   value="PAYMENT TYPE:"/>
+                        <p:inputText style="width: 80%" value="#{addAccessBean.paymenttype}"/>
+                        <p:outputLabel style="color: white;font-size:20px;font-family: fantasy"  value="REQUEST IP:"/>
+                        <p:inputText  style="width: 80%" value="#{addAccessBean.requestId}"/>
+                        <p:outputLabel style="color: white;font-size:20px;font-family: fantasy"  value="ESCROWBALANCE:"/>
+                        <p:inputText style="width: 80%" value="#{addAccessBean.escrowbalance}"/>
+                        <p:outputLabel style="color: white;font-size:20px;font-family: fantasy"  value="TOKEN:"/>
+                        <p:inputText style="width: 80%" value="#{addAccessBean.token}"/>
+                        <p:outputLabel style="color: white;font-size:20px;font-family: fantasy"  value="REQUEST IP2:"/>
+                        <p:inputText style="width: 80%" value="#{addAccessBean.requestIp2}" />
+                        <p:outputLabel  style="color: white;font-size:20px;font-family: fantasy"  value="DATE TOKEN GENERATED:"/>
+                        <p:calendar value="#{addAccessBean.daetokengeneraed}"/>
+                    </h:panelGrid>
+                    <br> </br>
+                    <p:commandButton  style="background:  white ;color: black;font-size:25px;font-family: fantasy" action="#{addAccessBean.addaccess()}" value="Save" update="emessage"/>
+
+                </center>
+            </h:form>
+        </center>
+
+    </h:body>
+</html>

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+
+    <f:view contentType="text/html">
+        <h:head>
+            <style type="text/css">
+
+
+                a img{
+                    width: 85px !important;
+                    height: 110px !important;
+                    padding-top: 30px;
+
+                }
+
+            </style>
+            
+            <script type='text/javascript'>
+                $(document).ready(function () {
+                    $('#link').click(function () {
+                        $('#imageReplace').attr("src", "image/download (3)_1.png");
+                    });
+                    $('#links').click(function () {
+                        $('#imageReplaces').attr("src", "image/download (9)_1.png");
+                    });
+                    $('#linkss').click(function () {
+                        $('#imageReplacess').attr("src", "image/download (7)_1.png");
+                    });
+                    $('#linksss').click(function () {
+                        $('#imageReplacesss').attr("src", "image/download (5)_1.png");
+                    });
+                });
+            </script> 
+            
+            <f:facet name="first">
+                <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
+                <title>Navigate</title>
+
+            </f:facet>
+
+        </h:head>
+        <h:body>
+            <ui:composition >
+
+              
+                <h:form>
+
+                </h:form>
+                  <a href="Homepage.xhtml?faces-redirect=true"><img  src="image/download (1).png">  </img></a>
+                  <a id="link" href="AddHhuPage.xhtml?faces-redirect=false" ><img id="imageReplace" src="image/download (3).png"> </img></a>
+                  <a id="links" href="EditHhuPage.xhtml?faces-redirect=true"  ><img id="imageReplaces"  src="image/download (9).png"> </img></a>
+                  <a id="linkss" href="SearchHhuPage.xhtml?faces-redirect=true" ><img id="imageReplacess" src="image/download (7).png"> </img></a>
+                  <a id="linksss" href="ViewHhuPage.xhtml?faces-redirect=true" ><img id="imageReplacesss" src="image/download (5).png"> </img></a>
+                <a href="#{loginBean.logoutUser()}" immediate="true"><img  src="image/images.png"> </img></a>
+            </ui:composition>
+
+        </h:body>
+    </f:view>
+</html>

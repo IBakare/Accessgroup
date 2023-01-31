@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>ACCESSGROUP</title>
+
+        <link href="home.css" rel="stylesheet"></link>
+       
+            <script type='text/javascript'>
+                $(document).ready(function(){
+                
+                    $('#imageReplaces').attr("src","image/download (10)_2.png");
+               
+              });
+            </script>
+    </h:head>
+
+    <h:body style="background: url(image/a_2.jpg)">
+         <h1 style="color: white; font-family: cursive;font-size:30px;float: right"> EDIT ACCESSGROUP</h1>
+        <h1 style="color: transparent; font-family: sans-serif;font-size: 20px">ADD </h1>
+        <h1 style="color: transparent; font-family: sans-serif;font-size: 20px">ADD </h1>
+        <h1 style="color: transparent; font-family: sans-serif;font-size: 28px">ADD </h1>
+        <div id="menuss">
+            <center>
+                <ui:include src="munu_access.xhtml" />
+            </center>
+        </div>
+
+        <center>
+
+            <h:messages id="emessage"  showDetail="true" style="font-weight: bold"/>
+
+            <h:outputText id="resmessage" value="#{flash.responsemessage}" styleClass="#{flash.styleclass}" />
+            <p:ajaxStatus >
+                <f:facet name="start">
+                    <h:outputText styleClass="alert_info" value="Loading..." />
+                </f:facet>
+                <f:facet name="complete">
+                    <h:outputText  value="" />
+                </f:facet>
+            </p:ajaxStatus> 
+
+             <h1 style="color: transparent; font-family: sans-serif;font-size: 30px">EDIT </h1>
+
+            <center>
+
+                <p:panel id="panpend" style="width:1200px;background-color: transparent">
+                    <h:form>
+                        <p:messages id="emessage"  showSummary="true" showDetail="true" style="font-size: 70px; width: 200px" />
+                        <h:panelGrid columns="5" style="width: inherit">
+                            <p:outputLabel  style="color: white;font-size:30px;font-family: fantasy" value="SEARCH BY ACCESSGROUP:" />
+                            <p:autoComplete id="ab" completeMethod="#{editAccessBean.completeaccess}"  value="#{editAccessBean.searchValu}" placeholder="Enter AccessGroup"/> 
+                            <p:commandButton style="background: black ;color: white;font-size:20px;font-family: cursive" value="Search" action="#{editAccessBean.populatedbtable()}" update="tbl"/>
+
+                        </h:panelGrid>
+
+                        <p:dataTable value="#{editAccessBean.access}" var="staff" id="tbl" rowKey="#{staff.accessgroup}" scrollable="true" 
+                                     paginator="true" resizableColumns="true" selection="#{editAccessBean.selected}"  selectionMode="single" style="color: black;font-size:18px;font-family: cursive;background-color: white">
+                            
+                            <p:column   headerText="ID" style="color: white;background-color: black">
+                                <h:outputText value="#{staff.id}"/>
+                            </p:column>
+
+                            <p:column id="test" headerText="ACCESS GROUP" style="color: white;background-color: black">
+                                <h:outputText value="#{staff.accessgroup}"/>
+                            </p:column>
+
+                            
+                            <p:column headerText="UNDERTKING" style="color: white;background-color: black">
+                                <h:outputText value="#{staff.undertaking}"/>
+                            </p:column>
+
+                            <p:column headerText="ACTIVE" style="color: white;background-color: black">
+                                <h:outputText value="#{staff.active}"/>
+                            </p:column>
+
+                            <p:column headerText="ACCESSGROUP CODE" style="color: white;background-color: black">
+                                <h:outputText value="#{staff.activegroupcode}"/>
+                            </p:column>
+
+                            <p:column headerText="PAYMENT TYPE" style="color: white;background-color: black">
+                                <h:outputText value="#{staff.paymenttype}"/>
+                            </p:column>
+
+                            <p:column headerText="REQUEST IP" style="color: white;background-color: black">
+                                <h:outputText value="#{staff.requestId}"/>
+                            </p:column>
+
+                            <p:column headerText="ESCROWBALANCE" style="color: white;background-color: black">
+                                <h:outputText value="#{staff.escrowbalance}"/>
+                            </p:column>
+
+                            <p:column headerText="TOKEN" style="color: white;background-color: black">
+                                <h:outputText value="#{staff.token}"/>
+                            </p:column>
+
+                            <p:column headerText="DATE TOKEN GENERATED" style="color: white;background-color: black">
+                                <h:outputText value="#{staff.daetokengeneraed}"/>
+                            </p:column>
+
+                            <p:column headerText="REQUEST IP2" style="color: white;background-color: black">
+                                <h:outputText value="#{staff.requestIp2}"/>
+                            </p:column>
+
+                            <p:column  headerText="Action" style="width:40px;text-align: center;color: white;background-color: black">
+                                <p:commandButton  oncomplete="PF('editDialog').show()" icon="ui-icon-pencil" title="View" update="record" action="#{editAccessBean.populatedbtable()}">
+                                    <f:setPropertyActionListener value="#{staff}" target="#{editAccessBean.selected}" />
+                                </p:commandButton>
+                            </p:column>
+
+                        </p:dataTable>           
+
+                    </h:form>
+
+                    <p:dialog id="tdbox" style="height:30px" fitViewport="true"  header="Edit AccessGroup Record" widgetVar="editDialog" modal="true" position="center"  showEffect="fade" hideEffect="fade" resizable="false" closable="true"> 
+
+                        <h:form id="engSrch" prependId="false" > 
+                            <p:panelGrid columns="2" id="record" columnClasses="label,value" style="text-wrap: avoid;width: 400px" >
+
+                                <h:outputLabel value="ID"/>
+                                <h:inputText value="#{editAccessBean.selected.id}" readonly="true"/>
+                                
+                                <h:outputLabel value="AccessGroup"/>
+                                <h:inputText value="#{editAccessBean.selected.accessgroup}"/>
+
+                                <h:outputLabel value="Undertaking"/>
+                                <h:inputText value="#{editAccessBean.selected.undertaking}"/>
+
+                                <h:outputLabel value="Active?"/>
+                                <h:selectBooleanCheckbox value="#{editAccessBean.selected.active}" />
+
+                                <h:outputLabel value="AccessGroup Code"/>
+                                <h:inputText  value="#{editAccessBean.selected.accessgroup}"/>
+
+                                <h:outputLabel value="Payment Type"/>
+                                <h:inputText  value="#{editAccessBean.selected.paymenttype}"/>
+
+                                <h:outputLabel value="Request Ip"/>
+                                <h:inputText value="#{editAccessBean.selected.requestId}"/>
+
+                                <h:outputLabel value="Escrowbalance"/>
+                                <h:inputText value="#{editAccessBean.selected.escrowbalance}"/>
+
+                                <h:outputLabel value="Token"/>
+                                <h:inputText value="#{editAccessBean.selected.token}"/>
+
+                                <h:outputLabel value="Date Token Generated"/>
+                                <h:inputText value="#{editAccessBean.selected.daetokengeneraed}"/>
+
+                                <h:outputLabel value="Request Ip2"/>
+                                <h:inputText value="#{editAccessBean.selected.requestIp2}"/>
+
+
+                            </p:panelGrid>
+
+                            <p:commandButton  action="#{editAccessBean.editaccess()}" id="save" icon="ui-icon-check" value="Save" style="margin-top: 10px;" process="@this,engSrch"/>
+                        </h:form>
+
+                    </p:dialog>
+
+                </p:panel>
+
+            </center>
+        </center> 
+    </h:body>
+
+</html>

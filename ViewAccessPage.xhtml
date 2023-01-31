@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>ACCESSGROUP</title>
+        <link href="home.css" rel="stylesheet"></link>
+        <!--<script src="js/jquery-3.2.1.min.js"></script>-->
+        <script type='text/javascript'>
+            $(document).ready(function () {
+
+                $('#imageReplacesss').attr("src", "image/download (6)_2.png");
+
+            });
+        </script>
+    </h:head>
+    <h:body style="background: url(image/a_2.jpg)">
+        <h1 style="color: white; font-family: cursive;font-size:30px;float: right"> VIEW ACCESSGROUP</h1>
+        <h1 style="color: transparent; font-family: sans-serif;font-size: 20px">ADD </h1>
+        <h1 style="color: transparent; font-family: sans-serif;font-size: 20px">ADD </h1>
+        <h1 style="color: transparent; font-family: sans-serif;font-size: 28px">ADD </h1>
+        <div id="menuss">
+            <center>
+                <ui:include src="munu_access.xhtml" />
+            </center>
+        </div>
+
+        <center>
+            <h:messages id="emessage"  showDetail="true" style="font-weight: bold;color: white;font-family: sans-serif;font-size: 20px"/>
+            <h:outputText id="resmessage" value="#{flash.responsemessage}" styleClass="#{flash.styleclass}" />
+            <p:ajaxStatus>
+                <f:facet name="start">
+                    <h:outputText styleClass="alert_info" value="Loading..." />
+                </f:facet>
+                <f:facet name="complete">
+                    <h:outputText  value="" />
+                </f:facet>
+            </p:ajaxStatus> 
+
+            <h1 style="color: transparent; font-family: sans-serif;font-size: 30px">VIEW</h1>
+
+            <p:panel id="panpend" style="width:1200px;background-color: transparent">
+                <center>
+                    <h:form id= "a">
+
+
+                        <p:dataTable  value="#{viewAccessBean.view}" var="views" paginator="true" resizableColumns="true" 
+                                      rowKey="#{views.accessgroup}" id="accesstable" selection="#{viewAccessBean.selected}" selectionMode="single" rows="15" style="color: black;font-size:18px;font-family: cursive;background-color: white" >
+
+
+                            <p:column id="test" headerText="ID" filterBy="#{views.id}" filterMatchMode="contains" style="color: white;background-color: black">
+                                <h:outputText value="#{views.id}" style="background-color: transparent"/>
+                            </p:column>
+
+                            <p:column headerText="AccessGroup" filterBy="#{views.accessgroup}" filterMatchMode="contains" style="color: white;background-color: black">
+                                <h:outputText value="#{views.accessgroup}"/>
+                            </p:column>
+
+                            <p:column headerText="Active" filterBy="#{views.active}" filterMatchMode="contains" style="color: white;background-color: black">
+                                <h:outputText value="#{views.active}"/>
+                            </p:column>
+
+
+                            <p:column headerText="PaymentType" filterBy="#{views.paymenttype}" filterMatchMode="startsWith" style="color: white;background-color: black">
+                                <h:outputText value="#{views.paymenttype}"/>
+                            </p:column>
+
+                            <p:column headerText="RequestIp" filterBy="#{views.requestId}" filterMatchMode="contains" style="color: white;background-color: black">
+                                <h:outputText value="#{views.requestId}"/>
+                            </p:column>                           
+
+
+                            <p:column headerText="Undertaking" style="color: black;background-color: white">
+                                <h:outputText value="#{views.undertaking}"/>
+                            </p:column>
+
+
+                            <p:column headerText="AGCode" style="color: black;background-color: white">
+                                <h:outputText value="#{views.activegroupcode}"/>
+                            </p:column>
+
+
+
+                            <p:column headerText="Escrowbalance" style="color: black;background-color: white">
+                                <h:outputText value="#{views.escrowbalance}"/>
+                            </p:column>
+
+                            <p:column headerText="Token" style="color: black;background-color: white">
+                                <h:outputText value="#{views.token}"/>
+                            </p:column>
+
+                            <p:column headerText="DateTokenGenerated" style="color: black;background-color: white">
+                                <h:outputText value="#{views.daetokengeneraed}"/>
+                            </p:column>
+
+                            <p:column headerText="RequestIp2" style="color: black;background-color: white">
+                                <h:outputText value="#{views.requestIp2}"/>
+                            </p:column>
+
+                        </p:dataTable>
+                        <p:contextMenu for="accesstable">
+                            <p:menuitem value="AccessGroup Data"  update="panpend" oncomplete="PF('accessRecordData').show()"/>
+                            <p:menuitem value="New AccessGroup" update="panpend" action="AddAccessPage.xhtml?faces-redirect=true?"/>
+                            <p:menuitem value="Edit Record" update="panpend" oncomplete="PF('accessRecordView').show()"/>
+                        </p:contextMenu>
+                    </h:form>
+                    <h:form>
+
+
+                        <p:dialog widgetVar="accessRecordView" header="Edit Access Record" modal="true">
+                            <p:panelGrid columns="2" id="record" columnClasses="label,value" style="text-wrap: avoid;width: 400px">
+
+                                <h:outputText value="ID"/><p:inputText value="#{viewAccessBean.selected.id}" readonly="true"/>
+                                <h:outputText value="AccessGroup"/><p:inputText value="#{viewAccessBean.selected.accessgroup}"/>
+                                <h:outputText value="Undertaking"/><p:inputText value="#{viewAccessBean.selected.undertaking}"/>
+                                <h:outputText value="Active"/><p:inputText value="#{viewAccessBean.selected.active}"/>
+                                <h:outputText value="AccessGroupCode"/><p:inputText value="#{viewAccessBean.selected.activegroupcode}"/>
+                                <h:outputText value="PaymentType"/><p:inputText value="#{viewAccessBean.selected.paymenttype}"/>
+                                <h:outputText value="RequestIp"/><p:inputText value="#{viewAccessBean.selected.requestId}"/>
+                                <h:outputText value="EscrowBalance"/><p:inputText value="#{viewAccessBean.selected.escrowbalance}"/>
+                                <h:outputText value="Token"/><p:inputText value="#{viewAccessBean.selected.token}"/>
+                                <h:outputText value="DateTokenGenerated"/><p:inputText value="#{viewAccessBean.selected.daetokengeneraed}"/>
+                                <h:outputText value="RequestIp2"/><p:inputText value="#{viewAccessBean.selected.requestIp2}"/>
+
+                            </p:panelGrid>
+                            <p:commandButton  action="#{viewAccessBean.editaccess()}" id="save" icon="ui-icon-check" value="Save" style="margin-top: 10px;" ajax="true"/>
+                        </p:dialog>
+                        <p:dialog widgetVar="accessRecordData" header="View Access Record" modal="true" >
+                            <p:panelGrid columns="2" id="records" columnClasses="label,value" style="text-wrap: avoid;width: 400px">
+
+                                <h:outputText value="ID"/><h:outputText  value="#{viewAccessBean.selected.id}"/>
+                                <h:outputText value="AccessGroup"/><h:outputText  value="#{viewAccessBean.selected.accessgroup}"/>
+                                <h:outputText value="Undertaking"/><h:outputText  value="#{viewAccessBean.selected.undertaking}"/>
+                                <h:outputText value="Active"/><h:outputText  value="#{viewAccessBean.selected.active}"/>
+                                <h:outputText value="AccessGroupCode"/><h:outputText  value="#{viewAccessBean.selected.activegroupcode}"/>
+                                <h:outputText value="PaymentType"/><h:outputText  value="#{viewAccessBean.selected.paymenttype}"/>
+                                <h:outputText value="RequestIp"/><h:outputText  value="#{viewAccessBean.selected.requestId}"/>
+                                <h:outputText value="EscrowBalance"/><h:outputText  value="#{viewAccessBean.selected.escrowbalance}"/>
+                                <h:outputText value="Token"/><h:outputText  value="#{viewAccessBean.selected.token}"/>
+                                <h:outputText value="DateTokenGenerated"/><h:outputText  value="#{viewAccessBean.selected.daetokengeneraed}"/>
+                                <h:outputText value="RequestIp2"/><h:outputText  value="#{viewAccessBean.selected.requestIp2}"/>
+
+                            </p:panelGrid>
+                        </p:dialog>
+
+
+                    </h:form>
+                </center>
+            </p:panel>
+
+        </center>
+
+    </h:body>
+</html>

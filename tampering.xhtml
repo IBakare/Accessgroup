@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+<script type='text/javascript'>
+            $(document).ready(function () {
+
+                $('#imageReplace').attr("src", "image/images.jpg");
+
+            });
+        </script>
+        
+        <style type="text/css">
+                a img{
+                    width: 85px !important;
+                    height:110px !important;
+                    padding-top: 30px;
+
+                }
+            </style>
+    </h:head>
+   
+    <h:body style="background: url(image/a_2.jpg)">
+
+        <h1 style="color: white; font-family: cursive;font-size:30px;float: right"> TAMPERING VIEW</h1>
+        <h1 style="color: transparent; font-family: sans-serif;font-size: 20px">ADD </h1>
+        <h1 style="color: transparent; font-family: sans-serif;font-size: 20px">ADD </h1>
+        <h1 style="color: transparent; font-family: sans-serif;font-size: 28px">ADD </h1>
+                <center>
+                     <ui:include src="menu.xhtml" />
+            <h:messages id="emessage"  showDetail="true"  style="font-weight: bold;color: white;font-family: sans-serif;font-size: 20px"/>
+
+            <h:outputText id="resmessage" value="#{flash.responsemessage}" styleClass="#{flash.styleclass}" />
+            <p:ajaxStatus >
+                <f:facet name="start">
+                    <h:outputText styleClass="alert_info" value="Loading..." />
+                </f:facet>
+                <f:facet name="complete">
+                    <h:outputText  value="" />
+                </f:facet>
+            </p:ajaxStatus> 
+
+            <h1 style="color: transparent; font-family: sans-serif;font-size: 30px">VIEW</h1>
+
+            <center>
+                <h:form>
+                    <p:panel id="panpend" style="width:1200px;background-color: transparent">
+
+                        <p:dataTable value="#{tamperingBean.getAccount()}" var="views" paginator="true" resizableColumns="true" 
+                                     rowKey="#{views.meternumber}" id="hhutable" selection="#{tamperingBean.selected}" selectionMode="single" rows="15" style="color: black;font-size:18px;font-family: cursive;background-color: white" >
+
+
+                            <p:column id="test" headerText="METER NO" filterBy="#{views.meternumber}" filterMatchMode="contains" style="color: black;background-color: white">
+                                <h:outputText value="#{views.meternumber}"/>
+                            </p:column>
+
+                            <p:column headerText="DEVICE ID" filterBy="#{views.deviceid}" filterMatchMode="contains"  style="color: black;background-color: white">
+                                <h:outputText value="#{views.deviceid}"/>
+                            </p:column>
+
+                            <p:column headerText="TAMPER TYPE" filterBy="#{views.tampertype}" filterMatchMode="contains" style="color: black;background-color: white">
+                                <h:outputText value="#{views.tampertype}"/>
+                            </p:column>
+
+                            <p:column headerText="LONGITUDE" filterBy="#{views.longitude}" filterMatchMode="contains" style="color: black;background-color: white">
+                                <h:outputText value="#{views.longitude}"/>
+                            </p:column>
+
+                            <p:column headerText="LATITUDE" filterBy="#{views.lactitude}" filterMatchMode="startsWith" style="color: black;background-color: white">
+                                <h:outputText value="#{views.lactitude}"/>
+                            </p:column>
+
+                            <p:column headerText="READ DATE" filterBy="#{views.readdate}" filterMatchMode="contains" style="color: black;background-color: white">
+                                <h:outputText value="#{views.readdate}"/>
+                            </p:column>
+
+
+                            <p:column headerText="MARKETER ID"  style="color: white;background-color: black">
+                                <h:outputText value="#{views.marketerid}"/>
+                            </p:column>
+                            
+                            <p:column headerText="IMAGE"  style="color: black;background-color: white">
+                                <img src="#{tamperingBean.productImage}" style="border: none" alt="Picture Not Found" id="img" width="100px" height="150px" />
+                                  <!--  <f:param name="meterno" value="#{views.meternumber}" />-->
+					
+                            </p:column>
+
+                           
+                        </p:dataTable>
+
+                        <p:contextMenu for="hhutable">
+                            <p:menuitem value="Tampering Data"  update="panpend" oncomplete="PF ('accessRecordData').show()"/>
+                        </p:contextMenu>
+
+                        <p:dialog widgetVar="accessRecordData" header="View Tampering Record" modal="true" >
+                            
+                            <p:panelGrid columns="2" id="record" columnClasses="label,value" style="text-wrap: avoid;width: 400px">
+
+                                <h:outputText value="IMAGE"/> 
+                                <h:graphicImage id="img" value="#{tamperingBean.selected.imgData}" style="border: none" alt="Picture Not Found" width="100" height="150" />
+                                <h:outputText value="METERNO"/><h:outputText value="#{tamperingBean.selected.meternumber}"/>
+                                <h:outputText value="DEVICEID"/><h:outputText value="#{tamperingBean.selected.deviceid}"/>
+                                <h:outputText value="MARKETER ID"/><h:outputText value="#{tamperingBean.selected.marketerid}"/>
+                                <h:outputText value="TAMPERTYPE"/><h:outputText value="#{tamperingBean.selected.tampertype}"/>
+                                <h:outputText value="LONGITUDE"/><h:outputText value="#{tamperingBean.selected.longitude}"/>
+                                <h:outputText value="LATITUDE"/><h:outputText value="#{tamperingBean.selected.lactitude}"/>
+                                <h:outputText value="READDATE"/><h:outputText value="#{tamperingBean.selected.readdate}"/>
+                              </p:panelGrid>
+                               
+                                    </p:dialog>
+
+                    </p:panel>
+                </h:form>
+            </center>
+        </center>
+
+    </h:body>
+</html>
