@@ -1,1 +1,1 @@
-# Accessgroup is a project to add, edit and delete information 
+# Conceptualised, designed and produced a java web-based application to manage handheld devices, access group and operators
